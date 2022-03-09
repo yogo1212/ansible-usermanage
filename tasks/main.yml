@@ -1,23 +1,23 @@
 ---
 
-- include: include-vars.yml
+- include_tasks: include-vars.yml
   when: usermanage_include_vars
   tags: usermanage_include_vars
 
-- include: sources.yml
+- include_tasks: sources.yml
   when: usermanage_compile_sources_only or not usermanage_compile_sources_only
   tags: sources
 
-- include: debug.yml
+- include_tasks: debug.yml
   when: usermanage_debug and not usermanage_compile_sources_only
 
-- include: per_user_group.yml
+- include_tasks: per_user_group.yml
   when: usermanage_create_per_user_group and cuser.users_db is defined and not usermanage_compile_sources_only
 
-- include: groups.yml
+- include_tasks: groups.yml
   when: usermanage_groupsdb is defined and usermanage_groupsdb is not none and not usermanage_compile_sources_only
 
-- include: users.yml
+- include_tasks: users.yml
   when: not usermanage_compile_sources_only
 
 - check_users: users_var="{{ cuser }}"
