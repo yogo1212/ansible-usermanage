@@ -95,7 +95,7 @@ class LoadVarDir(object):
                     new_data["state"] = "present"
                 elif chef_action == "remove":
                     new_data["state"] = "absent"
-            chef_groups = new_data.get("groups", False)
+            chef_groups = new_data.get("groups", [])
             primary_group = new_data.get("group", False)
             if primary_group in chef_groups:
                 # Databag issue for smart-os Issue
