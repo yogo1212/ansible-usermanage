@@ -184,8 +184,17 @@ class UsersDB(object):
             user_keys.append({"key": keys})
         else:
             for key in keys:
+                str_type = (str,)
+
+                # python2 had the 'basestring' built-in type which str and unicode were derived from
+                # TODO when python2 is no longer a thing, test for str only
+                try:
+                    str_types = (basestring,)
+                except NameError:
+                    pass
+
                 # Basic syntax check
-                if isinstance(key, basestring) and "ssh-" in key:
+                if isinstance(key, str_type) and "ssh-" in key:
                     user_keys.append({"key": key})
                 elif "key" not in key and "name" not in key:
                     # TODO: Should work without keys
